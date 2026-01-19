@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Investment Platform</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
+</head>
+
+<body>
+
+    <!-- Header -->
+    <header>
+        <div>Investment Platform</div>
+        <nav class="menu">
+            <a href="#set-goal">Set Goals</a>
+            <a href="login-register.html">login</a>
+            <a href="userdata.html">User data</a>
+            <a href="#wallet">Wallet</a>
+            <a href="yourinvestment.html">Stock Data</a>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <div class="container">
+
+        <!-- Articles Section -->
+        <div class="section articles">
+            <h3>Articles</h3>
+            <div class="article">
+                <h4>Stock Market Today</h4>
+                <p>Dow Jones surges 2% on latest economic data...</p>
+                <button><a href="https://www.cnbc.com/world/?region=world">Read More</a></button>
+            </div>
+            <div class="article">
+                <h4>Top Investment Trends</h4>
+                <p>Discover emerging opportunities in 2025...</p>
+                <button>Read More</button>
+            </div>
+        </div>
+
+        <!-- Set Goal Section -->
+        <section id="set-goal" class="goal-section">
+            <h2>Set Your Investment Goal</h2>
+            <form id="goal-form">
+                <label for="goal-type">Goal Type</label>
+                <select id="goal-type" name="goal-type">
+                    <option value="growth">Growth</option>
+                    <option value="income">Income</option>
+                </select>
+
+                <label for="goal-value">Goal Value</label>
+                <input type="number" id="goal-value" name="goal-value" placeholder="Enter goal value" required>
+
+                <label for="time-period">Time Period</label>
+                <select id="time-period" name="time-period">
+                    <option value="1">1 Month</option>
+                    <option value="2">2 Months</option>
+                    <option value="6">6 Months</option>
+                    <option value="12">1 Year</option>
+                </select>
+
+                <button type="submit" class="set-goal-btn">Set Goal</button>
+            </form>
+            <p id="goal-message"></p>
+        </section>
+
+        <!-- Wallet Section -->
+        <div id="wallet" class="section wallet">
+            <h3>Wallet</h3>
+            <div class="current-funds" id="currentFunds"><b>Current Funds: $500</b></div>
+            <div class="wallet-buttons">
+                <button>Add Funds</button>
+                <button>View Transactions</button>
+                <button>Withdraw Funds</button>
+            </div>
+        </div>
+
+        <!-- Stock Data Section -->
+        <div class="container">
+            <h1>Predicted Stocks</h1>
+            <div id="stockSymbol" class="stock-symbol">Loading...</div>
+            <div id="stockPrice" class="stock-price">Price: $0.00</div>
+            <div id="stockPriceChange" class="stock-price-change">Change: +0.00%</div>
+            <button class="random-stock-btn" onclick="showRandomStock()">Show suggested Stock</button>
+        </div>
+    
+        <script>
+            const stockSymbols = ["AAPL", "GOOGL", "AMZN", "MSFT", "TSLA", "NFLX", "FB", "NVDA"];
+            
+            function getRandomStock() {
+                const randomIndex = Math.floor(Math.random() * stockSymbols.length);
+                const stockSymbol = stockSymbols[randomIndex];
+                const randomPrice = (Math.random() * 1000 + 100).toFixed(2); // Random stock price between $100 and $1100
+                const randomChange = (Math.random() * 10 - 5).toFixed(2); // Random change between -5% and +5%
+                return {
+                    symbol: stockSymbol,
+                    price: randomPrice,
+                    change: randomChange
+                };
+            }
+    
+            function showRandomStock() {
+                const stockData = getRandomStock();
+                const stockSymbolDiv = document.getElementById('stockSymbol');
+                const stockPriceDiv = document.getElementById('stockPrice');
+                const stockPriceChangeDiv = document.getElementById('stockPriceChange');
+    
+                stockSymbolDiv.innerHTML = stockData.symbol;
+                stockPriceDiv.innerHTML = `Price: $${stockData.price}`;
+                stockPriceChangeDiv.innerHTML = `Change: ${stockData.change}%`;
+    
+                // Trigger animations by resetting and then updating
+                stockPriceDiv.style.opacity = 0;
+                stockPriceDiv.style.transform = 'translateY(20px)';
+                stockPriceChangeDiv.style.opacity = 0;
+                stockPriceChangeDiv.style.transform = 'translateY(20px)';
+    
+                setTimeout(() => {
+                    stockPriceDiv.style.opacity = 1;
+                    stockPriceDiv.style.transform = 'translateY(0)';
+                    stockPriceChangeDiv.style.opacity = 1;
+                    stockPriceChangeDiv.style.transform = 'translateY(0)';
+                }, 50);
+            }
+    
+            // Initial random stock on load
+            window.onload = showRandomStock;
+        </script>
+
+    </div>
+
+    <!-- Footer-->
+    <footer>
+        <p>Investment Platform © 2025</p>
+    </footer>
+
+    <!-- Chatbot -->
+    <div class="chatbot-container">
+        <div class="chatbot-header">AI Chatbot</div>
+        <div class="chat-messages" id="chat-messages"></div>
+        <div class="chat-input-container">
+            <input type="text" id="chat-input" class="chat-input" placeholder="Type your message..." />
+            <button id="send-btn" class="send-btn">Send</button>
+        </div>
+    </div>
+
+    <!-- Script -->
+    <script>
+        // Function to fetch stock data
+        async function getStockData() {
+            const symbol = document.getElementById("symbol").value.trim().toUpperCase();
+
+            if (!symbol) {
+                alert("Please enter a stock symbol.");
+                return;
+            }
+
+            try {
+                // Make a request to the backend to get stock data using the '/fetch-single-stock' endpoint
+                const response = await fetch(`/fetch-single-stock?symbol=${symbol}`);
+
+                // Parse the response data
+                const data = await response.json();
+
+                // If the response contains an error, show the error message
+                if (data.error) {
+                    document.getElementById("stockDataList").innerHTML = `<p>Error: ${data.error}</p>`;
+                    return;
+                }
+
+                // Display the stock data
+                const stock = data.data;
+                const stockHtml = `
+                    <div class="stock">
+                        <h2>${symbol} - Stock Data</h2>
+                        <p><strong>Price:</strong> $${stock.price}</p>
+                        <p><strong>PE Ratio:</strong> ${stock.pe_ratio}</p>
+                    </div>
+                `;
+
+                // Update the stock data container with the fetched stock information
+                document.getElementById("stockDataList").innerHTML = stockHtml;
+            } catch (error) {
+                document.getElementById("stockDataList").innerHTML = `<p>Error: Unable to fetch stock data.</p>`;
+            }
+        }
+
+        // Function to fetch suggested stock data
+        async function fetchSuggestedStockData() {
+            try {
+                const response = await fetch("http://localhost:8000/fetch-suggested-stocks");
+                const result = await response.json();
+
+                if (result.error) {
+                    alert("Error fetching stock data: " + result.error);
+                    return;
+                }
+
+                const stockDataList = document.getElementById("stockDataList");
+                stockDataList.innerHTML = "";
+
+                result.data.forEach(stock => {
+                    const stockCard = document.createElement("div");
+                    stockCard.classList.add("stock-card");
+
+                    const stockSymbol = document.createElement("h4");
+                    stockSymbol.textContent = stock.symbol;
+
+                    const stockPrice = document.createElement("p");
+                    stockPrice.textContent = `Price: $${stock.price}`;
+
+                    const peRatio = document.createElement("p");
+                    peRatio.textContent = `PE Ratio: ${stock.pe_ratio}`;
+
+                    stockCard.appendChild(stockSymbol);
+                    stockCard.appendChild(stockPrice);
+                    stockCard.appendChild(peRatio);
+
+                    stockDataList.appendChild(stockCard);
+                });
+            } catch (error) {
+                console.error("Error fetching stock data:", error);
+                alert("There was an issue fetching the stock data.");
+            }
+        }
+
+        // Fetch stock data as soon as the page loads
+        window.onload = fetchSuggestedStockData;
+    </script>
+</body>
+
+</html>

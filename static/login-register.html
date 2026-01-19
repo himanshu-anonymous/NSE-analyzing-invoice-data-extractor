@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="style.css">
+    <script>"script.js"</script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Login/Registration</title>
+
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #000;
+            color: #fff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .form-container {
+            background-color: #222;
+            padding: 20px;
+            border-radius: 10px;
+            width: 300px;
+            box-shadow: 0 0 10px rgba(0, 255, 0, 0.5);
+        }
+
+        .form-container h2 {
+            text-align: center;
+            color: #0f0;
+            margin-bottom: 20px;
+        }
+
+        .form-container label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        .form-container input {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #666;
+            border-radius: 5px;
+            background-color: #333;
+            color: #fff;
+        }
+
+        .form-container button {
+            width: 100%;
+            padding: 10px;
+            background-color: #0f0;
+            border: none;
+            border-radius: 5px;
+            color: #000;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .form-container button:hover {
+            background-color: #00b300;
+        }
+
+        .form-container .toggle-link {
+            text-align: center;
+            margin-top: 10px;
+        }
+
+        .form-container .toggle-link a {
+            color: #0f0;
+            text-decoration: none;
+        }
+
+        .form-container .toggle-link a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="form-container">
+        <h2 id="formTitle">Login</h2>
+        <form id="authForm">
+            <label for="email">Email:</label>
+            <input type="email" id="email" placeholder="Enter your email" required>
+
+            <label for="password">Password:</label>
+            <input type="password" id="password" placeholder="Enter your password" required>
+
+            <button type="submit" id="submitButton">Login</button>
+        </form>
+        <div class="toggle-link">
+            <p id="toggleText">Don't have an account? <a href="#" id="toggleLink">Sign Up</a></p>
+        </div>
+    </div>
+
+    <script>
+        const formTitle = document.getElementById('formTitle');
+        const authForm = document.getElementById('authForm');
+        const toggleLink = document.getElementById('toggleLink');
+        const toggleText = document.getElementById('toggleText');
+        const submitButton = document.getElementById('submitButton');
+
+        let isLogin = true;
+
+        toggleLink.addEventListener('click', (e) => {
+            e.preventDefault();
+            isLogin = !isLogin;
+
+            if (isLogin) {
+                formTitle.innerText = 'Login';
+                submitButton.innerText = 'Login';
+                toggleText.innerHTML = "Don't have an account? <a href='#' id='toggleLink'>Sign Up</a>";
+            } else {
+                formTitle.innerText = 'Sign Up';
+                submitButton.innerText = 'Sign Up';
+                toggleText.innerHTML = "Already have an account? <a href='#' id='toggleLink'>Login</a>";
+            }
+        });
+
+        authForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+
+            if (email && password) {
+                if (isLogin) {
+                    alert('Login successful!');
+                } else {
+                    alert('Sign-up successful!');
+                }
+
+                // Redirect to the investment platform
+                window.location.href = "Main.html"; // Change this to the actual URL of your platform
+            } else {
+                alert('Please fill out all fields.');
+            }
+        });
+    </script>
+</body>
+</html>>

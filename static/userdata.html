@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Data</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            background-color: #000;
+            color: #fff;
+        }
+
+        header {
+            background-color: #333;
+            color: #0f0;
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        header .menu a {
+            color: #0f0;
+            text-decoration: none;
+            margin: 0 10px;
+            transition: color 0.3s;
+        }
+
+        header .menu a:hover {
+            color: #fff;
+        }
+
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 80vh;
+        }
+
+        .user-data {
+            padding: 20px;
+            border: 1px solid #666;
+            border-radius: 5px;
+            background-color: #222;
+            width: 50%;
+        }
+
+        .user-data h3 {
+            text-align: center;
+        }
+
+        .user-info {
+            margin: 10px 0;
+        }
+
+        .user-info span {
+            font-weight: bold;
+            color: #0f0;
+        }
+
+        .update-btn {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            background-color: #0f0;
+            color: #000;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .update-btn:hover {
+            background-color: #00b300;
+        }
+
+        footer {
+            background-color: #333;
+            color: #0f0;
+            text-align: center;
+            padding: 10px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div>Investment Platform</div>
+        <div class="menu">
+            <a href="index.html">Home</a>
+            <a href="setgoals.html">Set Your Goal</a>
+            <a href="#">Get Your Goal</a>
+            <a href="user_data.html">User Data</a>
+            <a href="yourinvestment.html">Your Investments</a>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="user-data">
+            <h3>User Data</h3>
+            <div class="user-info"><span>Name:</span> John Doe</div>
+            <div class="user-info"><span>User ID:</span> 123456</div>
+            <div class="user-info"><span>Email ID:</span> johndoe@example.com</div>
+            <div class="user-info"><span>Wallet Balance:</span> $500</div>
+            <div class="user-info"><span>Date of Birth:</span> 01/01/1990</div>
+            <div class="user-info"><span>Mobile No:</span> +1 234 567 890</div>
+            <div class="user-info"><span>PAN Card No:</span> ABCDE1234F</div>
+            <div class="user-info"><span>Gender:</span> Male</div>
+            <div class="user-info"><span>Marital Status:</span> Single</div>
+            <button class="update-btn" onclick="updateDetails()">Update Details</button>
+        </div>
+    </div>
+
+    <footer>
+        <p>STACKOVERFLOWER AI BROKER.</p>
+    </footer>
+
+    <script>
+        function updateDetails() {
+            alert("Feature coming soon: Users will be able to update their data.");
+        }
+    </script>
+</body>
+</html>

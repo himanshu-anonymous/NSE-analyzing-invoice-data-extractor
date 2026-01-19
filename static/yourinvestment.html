@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Investments</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #000;
+            color: #fff;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: #333;
+            color: #0f0;
+            padding: 10px 20px;
+            text-align: center;
+        }
+
+        .container {
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .investment-item {
+            background-color: #222;
+            padding: 15px;
+            margin: 10px;
+            border-radius: 5px;
+            border: 1px solid #666;
+            width: 60%;
+        }
+
+        .investment-item h4 {
+            color: #0f0;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h2>Your Investments</h2>
+</header>
+
+<div class="container" id="investmentList">
+    <!-- Investment goals will be dynamically added here -->
+</div>
+
+<script>
+    // Fetch investment goals from localStorage
+    const goals = JSON.parse(localStorage.getItem("investmentGoals")) || [];
+
+    const investmentList = document.getElementById("investmentList");
+
+    // If there are no goals, show a message
+    if (goals.length === 0) {
+        investmentList.innerHTML = "<p>No investments set yet. Please set your goals.</p>";
+    } else {
+        // Display each goal
+        goals.forEach(goal => {
+            const goalElement = document.createElement("div");
+            goalElement.classList.add("investment-item");
+            goalElement.innerHTML = `
+                <h4>Investment Type: ${goal.goalType}</h4>
+                <p>Amount: $${goal.amount}</p>
+                <p>Time Frame: ${goal.timeframe} months</p>
+            `;
+            investmentList.appendChild(goalElement);
+        });
+    }
+</script>
+
+</body>
+</html>

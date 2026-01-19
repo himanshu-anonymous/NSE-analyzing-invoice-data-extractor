@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Set Your Investment Goal</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #000;
+            color: #fff;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: #333;
+            color: #0f0;
+            padding: 10px 20px;
+            text-align: center;
+        }
+
+        .container {
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 80vh;
+        }
+
+        .form-container {
+            background-color: #222;
+            padding: 20px;
+            border-radius: 5px;
+            border: 1px solid #666;
+        }
+
+        input, select {
+            padding: 10px;
+            margin: 10px;
+            background-color: #444;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+        }
+
+        button {
+            padding: 10px;
+            background-color: #0f0;
+            color: #000;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #00b300;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h2>Set Your Investment Goal</h2>
+</header>
+
+<div class="container">
+    <div class="form-container">
+        <form id="goalForm">
+            <label for="goalType">Investment Type:</label>
+            <select id="goalType" required>
+                <option value="Stocks">Stocks</option>
+                <option value="Crypto">Crypto</option>
+                <option value="ETFs">ETFs</option>
+                <option value="Mutual Funds">Mutual Funds</option>
+            </select>
+            <br>
+            <label for="amount">Goal Profit% to achive:</label>
+            <input type="number" id="amount" required>
+            <br>
+            <label for="timeframe">Time Frame (months):</label>
+            <input type="number" id="timeframe" required>
+            <br>
+            <button type="submit">Set Goal</button>
+        </form>
+    </div>
+</div>
+
+<script>
+    document.getElementById("goalForm").addEventListener("submit", function(event) {
+        event.preventDefault();
+
+        const goalType = document.getElementById("goalType").value;
+        const amount = document.getElementById("amount").value;
+        const timeframe = document.getElementById("timeframe").value;
+
+        // Store goal data in localStorage
+        const goal = { goalType, amount, timeframe };
+        let goals = JSON.parse(localStorage.getItem("investmentGoals")) || [];
+        goals.push(goal);
+        localStorage.setItem("investmentGoals", JSON.stringify(goals));
+
+        // Redirect to "Your Investments" page
+        window.location.href = "yourinvestment.html";
+    });
+</script>
+
+</body>
+</html>
