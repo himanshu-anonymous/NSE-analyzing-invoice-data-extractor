@@ -8,8 +8,8 @@ from pathlib import Path
 import io
 
 # Set up Google API Key
-GOOGLE_API_KEY = os.getenv('AIzaSyC15hBMiMRDoF42JRuiHrCfrmC2VM6IKF8')  # Store your Google API Key securely
-genai.configure(api_key='AIzaSyC15hBMiMRDoF42JRuiHrCfrmC2VM6IKF8')
+GOOGLE_API_KEY =('')  # Store your Google API Key securely
+genai.configure(api_key='')
 
 # Model Configuration
 MODEL_CONFIG = {
