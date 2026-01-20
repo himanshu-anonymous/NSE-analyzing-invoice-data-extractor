@@ -17,7 +17,7 @@ An automated tool designed to extract structured financial data from PDF invoice
 
 ### 1. Clone the Repository
 ```bash
-git clone [https://github.com/your-username/invoice-extractor.git](https://github.com/your-username/invoice-extractor.git)
+https://github.com/himanshu-anonymous/NSE-analyzing-invoice-data-extractor.git
 cd invoice-extractor
 
 # Create the environment
